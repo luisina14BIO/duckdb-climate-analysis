@@ -1,32 +1,32 @@
-# Meteorological Data Analysis with DuckDB
+# Análisis de Datos Meteorológicos con DuckDB
 
-An analytical project using **DuckDB and SQL** to explore daily temperature records from Central Park, New York, using a CSV file as the data source.
+Proyecto analítico que utiliza **DuckDB y SQL** para explorar registros diarios de temperatura de Central Park, Nueva York, utilizando un archivo CSV como fuente de datos.
 
-The project demonstrates how to perform analytical queries directly on files without creating a persistent database.
+El proyecto demuestra cómo realizar consultas analíticas directamente sobre archivos, sin necesidad de crear una base de datos persistente.
 
-## Project Objectives
+## Objetivos del Proyecto
 
-* Query CSV data directly with DuckDB.
-* Calculate descriptive statistics and temperature aggregates.
-* Compare temperature patterns by year and month.
-* Identify days with the largest daily temperature ranges.
-* Apply basic data quality checks and document query execution times.
+* Consultar datos CSV directamente con DuckDB.
+* Calcular estadísticas descriptivas y agregaciones de temperatura.
+* Comparar patrones de temperatura por año y mes.
+* Identificar los días con los mayores rangos diarios de temperatura.
+* Aplicar controles básicos de calidad de datos y documentar los tiempos de ejecución de las consultas.
 
 ## Dataset
 
-* **Source:** NOAA — Global Historical Climatology Network Daily (GHCN-Daily).
-* **Station:** Central Park, New York (`USW00094728`).
-* **Period available in the processed dataset:** January 1, 2021 – February 5, 2025.
-* **Records:** 1,497 daily observations.
-* **Variables:** station ID, date, maximum temperature (°C), and minimum temperature (°C).
+* **Fuente:** NOAA — Global Historical Climatology Network Daily (GHCN-Daily).
+* **Estación:** Central Park, Nueva York (`USW00094728`).
+* **Período disponible en el dataset procesado:** del 1 de enero de 2021 al 5 de febrero de 2025.
+* **Registros:** 1.497 observaciones diarias.
+* **Variables:** ID de estación, fecha, temperatura máxima (°C) y temperatura mínima (°C).
 
-Data source: [NOAA GHCN-Daily — Central Park station](https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/USW00094728.csv).
+Fuente de datos: [NOAA GHCN-Daily — Estación de Central Park](https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/USW00094728.csv).
 
-Temperatures are converted from tenths of degrees Celsius to degrees Celsius during data preparation. The processed dataset contains one record per date with both maximum and minimum temperatures available.
+Durante la preparación de los datos, las temperaturas se convierten de décimas de grado Celsius a grados Celsius. El dataset procesado contiene un registro por fecha, con las temperaturas máximas y mínimas disponibles.
 
-**Coverage note:** 2025 contains only 36 observations, from January 1 to February 5. Therefore, its annual averages should not be compared directly with full-year averages.
+**Nota sobre la cobertura:** el año 2025 contiene únicamente 36 observaciones, desde el 1 de enero hasta el 5 de febrero. Por lo tanto, sus promedios anuales no deben compararse directamente con los promedios de años completos.
 
-## Project Structure
+## Estructura del Proyecto
 
 ```text
 duckdb-climate-analysis/
@@ -39,7 +39,7 @@ duckdb-climate-analysis/
 └── .gitignore
 ```
 
-## Technologies
+## Tecnologías
 
 * Python
 * DuckDB
@@ -47,76 +47,78 @@ duckdb-climate-analysis/
 * Pandas
 * Jupyter Notebook
 
-## Setup and Execution
+## Configuración y Ejecución
 
-### 1. Clone the repository
+### 1. Clonar el repositorio
 
 ```bash
 git clone https://github.com/luisina14BIO/duckdb-climate-analysis.git
 cd duckdb-climate-analysis
 ```
 
-### 2. Install dependencies
+### 2. Instalar las dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Run the analysis
+### 3. Ejecutar el análisis
 
 ```bash
 python analysis.py
 ```
 
-The script reads `data/climate_data.csv`, creates a temporary DuckDB view, filters records with missing temperatures, and executes the analytical queries.
+El script lee `data/climate_data.csv`, crea una vista temporal en DuckDB, filtra los registros con temperaturas faltantes y ejecuta las consultas analíticas.
 
-No persistent DuckDB database file is created.
+No se crea ningún archivo de base de datos persistente de DuckDB.
 
-## Analytical Queries
+## Consultas Analíticas
 
-The script includes the following analyses:
+El script incluye los siguientes análisis:
 
-1. **Overall summary:** number of records, average maximum and minimum temperatures, and historical temperature extremes.
-2. **Annual comparison:** yearly observation counts and average temperatures.
-3. **Daily temperature range:** the ten dates with the largest difference between maximum and minimum temperatures.
-4. **Monthly averages:** average maximum and minimum temperatures grouped by calendar month.
-5. **Temporal coverage:** first and last available dates and observation counts for each year.
+1. **Resumen general:** cantidad de registros, temperaturas máximas y mínimas promedio, y extremos históricos de temperatura.
+2. **Comparación anual:** cantidad de observaciones y temperaturas promedio por año.
+3. **Rango diario de temperatura:** las diez fechas con la mayor diferencia entre las temperaturas máximas y mínimas.
+4. **Promedios mensuales:** temperaturas máximas y mínimas promedio agrupadas por mes calendario.
+5. **Cobertura temporal:** primera y última fecha disponible, y cantidad de observaciones por año.
 
-These queries demonstrate aggregations, grouping, sorting, derived metrics, and data quality validation using SQL.
+Estas consultas permiten aplicar agregaciones, agrupaciones, ordenamientos, métricas derivadas y validaciones de calidad de datos mediante SQL.
 
-## Key Findings
+## Principales Hallazgos
 
-* **1,497 observations** are available in the processed dataset.
-* Average daily maximum temperature: **17.62 °C**.
-* Average daily minimum temperature: **9.87 °C**.
-* Highest recorded daily maximum: **36.7 °C**.
-* Lowest recorded daily minimum: **−16.0 °C**.
-* July has the highest average daily maximum temperature among the calendar months in this dataset.
-* The largest observed daily temperature range is **27.6 °C**, on December 23, 2022.
+* El dataset procesado contiene **1.497 observaciones**.
+* Temperatura máxima diaria promedio: **17,62 °C**.
+* Temperatura mínima diaria promedio: **9,87 °C**.
+* Temperatura máxima diaria más alta registrada: **36,7 °C**.
+* Temperatura mínima diaria más baja registrada: **−16,0 °C**.
+* Julio presenta la temperatura máxima diaria promedio más alta entre los meses calendario incluidos en este dataset.
+* El mayor rango diario de temperatura observado es de **27,6 °C**, el 23 de diciembre de 2022.
 
-The results describe the available observations and should not be interpreted as a complete climate assessment.
+Los resultados describen las observaciones disponibles y no deben interpretarse como una evaluación climática completa.
 
-## Query Execution Times
+## Tiempos de Ejecución de las Consultas
 
-Observed execution times in the development environment:
+Tiempos de ejecución observados en el entorno de desarrollo:
 
-| Query                   | Time (seconds) |
-| ----------------------- | -------------: |
-| Overall summary         |         0.2839 |
-| Annual comparison       |         0.3490 |
-| Daily temperature range |         0.1767 |
-| Monthly averages        |         0.2704 |
+| Consulta                    | Tiempo (segundos) |
+| --------------------------- | ----------------: |
+| Resumen general             |            0.2839 |
+| Comparación anual           |            0.3490 |
+| Rango diario de temperatura |            0.1767 |
+| Promedios mensuales         |            0.2704 |
 
-These measurements include query execution and conversion of the results to Pandas DataFrames. Execution times may vary by machine and environment.
+Estas mediciones incluyen la ejecución de las consultas y la conversión de los resultados a DataFrames de Pandas. Los tiempos pueden variar según el equipo y el entorno de ejecución.
 
-## Database Design Approach
+## Enfoque de Diseño de Base de Datos
 
-DuckDB is used as an embedded analytical SQL engine. The CSV is accessed directly, and the temporary view exists only during script execution.
+DuckDB se utiliza como un motor SQL analítico integrado. El archivo CSV se consulta directamente y la vista temporal existe únicamente durante la ejecución del script.
 
-This approach avoids maintaining a separate database file while allowing SQL-based analysis of structured data.
+Este enfoque evita la necesidad de mantener un archivo de base de datos independiente y permite realizar análisis de datos estructurados mediante SQL.
 
-## Future Improvements
+## Mejoras Futuras
 
-* Extend the dataset to include a complete year for 2025.
-* Visualize seasonal and annual temperature patterns.
-* Compare temperature trends across multiple weather stations.
+* Ampliar el dataset para incluir un año completo de 2025.
+* Visualizar los patrones estacionales y anuales de temperatura.
+* Comparar las tendencias de temperatura entre múltiples estaciones meteorológicas.
+
+
