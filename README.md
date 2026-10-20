@@ -52,11 +52,9 @@ duckdb-climate-analysis/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/duckdb-climate-analysis.git
+git clone https://github.com/luisina14BIO/duckdb-climate-analysis.git
 cd duckdb-climate-analysis
 ```
-
-Replace `YOUR_USERNAME` with your GitHub username.
 
 ### 2. Install dependencies
 
